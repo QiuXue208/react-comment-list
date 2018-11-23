@@ -2,7 +2,7 @@ class CommentBox extends React.Component{
     render(){
         return(
             <div className="commentBox">
-              <h1>Welcome to add comments!</h1>
+              <h1>Welcome To Add Your Interest!</h1>
               <CommentList />
               <CommentForm />
             </div>
@@ -13,7 +13,8 @@ class CommentList extends React.Component{
     render(){
         return(
             <div className="commentList">
-                <Comment />
+                <Comment author="Snowy" interest="run"/>
+                <Comment author="Windy" interest="dance"/>
             </div>
         )
     }
@@ -22,8 +23,8 @@ class Comment extends React.Component{
     render(){
         return(
             <div className="comment">
-                <h3>名字</h3>
-                <h6>文本</h6>
+                <h3>{this.props.author}</h3>
+                <h6>{this.props.interest}</h6>
             </div>
         )
     }

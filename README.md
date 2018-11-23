@@ -42,3 +42,7 @@ PORT=3001 node server.js
 2. 试着使用props获取数据
   
    - 数据应该显示到Comment组件中，所以在使用Comment组件的时候传入一些属性，在Comment组件中通过props来获取数据
+
+3. 使支持Markdown格式
+
+   - 使用第三方库remarkable，这里使用script来引入remarkable
