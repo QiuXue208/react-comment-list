@@ -27,4 +27,12 @@ PORT=3001 node server.js
 * comments.json:这里的数据库使用JSON文件来代替,文件用于存储评论相关的信息
 * public:用于书写HTML、CSS、JS
 
+## 组件规划说明
+
+在这个页面，一共有四个组件，结构如下
+- CommentBox
+  - CommentList
+    - Comment
+  - CommentForm
+
 ## 操作步骤
