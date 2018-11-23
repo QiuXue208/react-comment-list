@@ -39,4 +39,6 @@ PORT=3001 node server.js
 
 1. 先表示出该评论页面的大致轮廓，并添加一些样式
 
-
+2. 试着使用props获取数据
+  
+   - 数据应该显示到Comment组件中，所以在使用Comment组件的时候传入一些属性，在Comment组件中通过props来获取数据
