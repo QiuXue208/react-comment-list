@@ -12,7 +12,7 @@ class CommentBox extends React.Component{
 class CommentList extends React.Component{
     render(){
         return(
-            <div>
+            <div className="commentList">
                 <Comment />
             </div>
         )
@@ -21,7 +21,7 @@ class CommentList extends React.Component{
 class Comment extends React.Component{
     render(){
         return(
-            <div>
+            <div className="comment">
                 <h3>名字</h3>
                 <h6>文本</h6>
             </div>
@@ -31,9 +31,9 @@ class Comment extends React.Component{
 class CommentForm extends React.Component{
     render(){
         return (
-            <div>
+            <div className="commentForm">
                 <form>
-                    <input type="text" placeholder="Your name" />
+                    <input className="name" type="text" placeholder="Your name" />
                     <input type="text" placeholder="Your interests" />
                     <input type="submit" value="submit" />
                 </form>
