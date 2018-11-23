@@ -48,4 +48,9 @@ PORT=3001 node server.js
    - 使用第三方库remarkable，这里使用script来引入remarkable
 
 4. 声明一个JSON数据，然后读取该数据并渲染到页面
-   - 声明一个变量来存储JSON数据，然后在CommentBox组件中作为属性值来传给子组件使用；而在子组件CommentList中，将this.props.data作为属性值又传给其子组件Comment来使用
+   - 声明一个变量data来存储JSON数据，然后在CommentBox组件中作为属性值来传给子组件使用；而在子组件CommentList中，将this.props.data作为属性值又传给其子组件Comment来使用
+
+5. 把写死的数据换成从后台获取动态数据
+
+   - <CommentBox url="/api/comments" /> ，在server.js文件中，写明了/api/comments路径下不同的请求所做的事情
+   - 在CommentBox组件中，将data变量存储在state中，而通过从后台获取数据来更新state。在CommentList组件上，用this.state.date作为其属性值来供子组件使用
