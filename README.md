@@ -54,3 +54,4 @@ PORT=3001 node server.js
 
    - <CommentBox url="/api/comments" /> ，在server.js文件中，写明了/api/comments路径下不同的请求所做的事情
    - 在CommentBox组件中，将data变量存储在state中，而通过从后台获取数据来更新state。在CommentList组件上，用this.state.date作为其属性值来供子组件使用
+   - 在CommentBox组件中，用jQuery向服务器发出请求，去获取数据。而这个获取数据并更新界面的操作就等组件第一次渲染完之后，所以放到componentDidMount中
