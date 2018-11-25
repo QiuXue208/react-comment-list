@@ -16,8 +16,8 @@ class CommentBox extends React.Component{
             url:this.props.url,
             dataType:'json',
             cache:false,
-            success:function(){
-                this.setState({data:this.state.data})
+            success:function(data){
+                this.setState({data:data})
             }.bind(this),
             error:function(xhr,status,err){
                 console.error(this.props.url,status,err.toString())
@@ -25,9 +25,10 @@ class CommentBox extends React.Component{
         })
     }
     onCommentSubmit(comment){
-        let comments = this.state.data
+        // 不管后台保存成功没，直接把评论添加到列表中，让体验更快
+        var comments = this.state.data
         comment.id = Date().now()
-        let newComments = comments.concat([comment])
+        var newComments = comments.concat([comment])
         this.setSate({
             data:newComments
         })
@@ -124,7 +125,7 @@ class CommentForm extends React.Component{
                 <form>
                     <input className="name" type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange.bind(this)}/>
                     <input type="text" placeholder="Your comments" value={this.state.comment} onChange={this.handleCommentChange.bind(this)} />
-                    <input type="submit" value="post" onSubmit={this.handleSubmit.bind(this)} />
+                    <input type="submit" value="submit" onSubmit={this.handleSubmit.bind(this)} />
                 </form>
             </div>
         )
