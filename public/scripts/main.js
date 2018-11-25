@@ -1,7 +1,7 @@
-var data = [
+/*var data = [
     {id:1,author:"Snowy",comment:"This is one comment"},
     {id:2,author:"Windy",comment:"This is *another* comment"}
-]
+]*/
 class CommentBox extends React.Component{
     constructor(props){
         super(props)
