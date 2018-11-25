@@ -10,6 +10,7 @@ class CommentBox extends React.Component{
         }
         this.loadComments = this.loadComments.bind(this)
         this.componentDidMount = this.componentDidMount.bind(this)
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
     }
     loadComments(){
         $.ajax({
@@ -24,21 +25,21 @@ class CommentBox extends React.Component{
             }.bind(this)
         })
     }
-    onCommentSubmit(comment){
+    handleCommentSubmit(comment){
         // 不管后台保存成功没，直接把评论添加到列表中，让体验更快
         var comments = this.state.data
-        comment.id = Date().now()
+        comment.id = Date.now()
         var newComments = comments.concat([comment])
-        this.setSate({
+        this.setState({
             data:newComments
         })
         $.ajax({
             url:this.props.url,
-            dataType:json,
+            dataType:'json',
             type:'POST',
             data:comment,
             success:function(data){
-                this.setState({data:date})
+                this.setState({data:data})
             }.bind(this),
             error:function(xhr,status,err){
                 console.error(this.props.url,status,err.toString())
@@ -54,16 +55,16 @@ class CommentBox extends React.Component{
             <div className="commentBox">
               <h1>Welcome To Add Comments!</h1>
               <CommentList data={this.state.data}/>
-              <CommentForm onCommentSubmit={this.onCommentSubmit.bind(this)}/>
+              <CommentForm onCommentSubmit={this.handleCommentSubmit}/>
             </div>
         )
     }
 }
 class CommentList extends React.Component{
     render(){
-        var commentNodes = this.props.data.map((comment)=>{
+        var commentNodes = this.props.data.map((c)=>{
            return (
-               <Comment author={comment.author} key={comment.id}>{comment.comment}</Comment>
+               <Comment author={c.author} key={c.id}>{c.comment}</Comment>
            ) 
         })
         return(
@@ -113,7 +114,7 @@ class CommentForm extends React.Component{
         if(!author || !comment){
             return
         }
-        this.props.onCommentSubmit({author:this.state.author,comment:this.state.comment})
+        this.props.onCommentSubmit({author:author,comment:comment})
         this.setState({
             author:'',
             comment:''
@@ -122,10 +123,10 @@ class CommentForm extends React.Component{
     render(){
         return (
             <div className="commentForm">
-                <form>
+                <form  onSubmit={this.handleSubmit.bind(this)}>
                     <input className="name" type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange.bind(this)}/>
                     <input type="text" placeholder="Your comments" value={this.state.comment} onChange={this.handleCommentChange.bind(this)} />
-                    <input type="submit" value="submit" onSubmit={this.handleSubmit.bind(this)} />
+                    <input type="submit" value="submit" />
                 </form>
             </div>
         )
