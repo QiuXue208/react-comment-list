@@ -8,19 +8,25 @@ class CommentBox extends React.Component{
         this.state = {
             data:[]
         }
+        this.loadComments = this.loadComments.bind(this)
+        this.componentDidMount = this.componentDidMount.bind(this)
     }
-    componentDidMount(){
+    loadComments(){
         $.ajax({
             url:this.props.url,
             dataType:'json',
             cache:false,
             success:function(){
-                this.setState({data:data})
+                this.setState({data:this.state.data})
             }.bind(this),
             error:function(xhr,status,err){
-                console.error(this.props.url,status.err.toString())
+                console.error(this.props.url,status,err.toString())
             }.bind(this)
         })
+    }
+    componentDidMount(){
+        this.loadComments()
+        setInterval(this.loadComments,500)
     }
     render(){
         return(
