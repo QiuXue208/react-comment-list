@@ -68,13 +68,30 @@ class Comment extends React.Component{
     }
 } 
 class CommentForm extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            author:'',
+            comment:''
+        }
+    }
+    handleAuthorChange(e){
+        this.setState({
+            author:e.target.value
+        })
+    }
+    handleCommentChange(e){
+        this.setState({
+            comment:e.target.value
+        })
+    }
     render(){
         return (
             <div className="commentForm">
                 <form>
-                    <input className="name" type="text" placeholder="Your name" />
-                    <input type="text" placeholder="Your comments" />
-                    <input type="submit" value="submit" />
+                    <input className="name" type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange.bind(this)}/>
+                    <input type="text" placeholder="Your comments" value={this.state.comment} onChange={this.handleCommentChange.bind(this)} />
+                    <input type="submit" value="post" />
                 </form>
             </div>
         )
