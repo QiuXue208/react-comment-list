@@ -60,3 +60,5 @@ PORT=3001 node server.js
    
    - 受控组件：给 input 绑定 value 值
    - 将author、comment 设置到 CommentForm 组件的state中，然后给 input[type="text"] 绑定一个 onChange 事件来更新用户的输入
+   - 提交表单,绑定一个 onSubmit 处理函数来处理表单的提交，在CommentBox组件中定义一个 onCommentSubmit 函数，然后通过属性来传给 CommentForm 组件，然后在 onSubmit 中来调用onCommentSubmit 函数，这个函数发起了一个Ajax请求，其类型为POST请求
+

@@ -24,6 +24,26 @@ class CommentBox extends React.Component{
             }.bind(this)
         })
     }
+    onCommentSubmit(comment){
+        let comments = this.state.data
+        comment.id = Date().now()
+        let newComments = comments.concat([comment])
+        this.setSate({
+            data:newComments
+        })
+        $.ajax({
+            url:this.props.url,
+            dataType:json,
+            type:'POST',
+            data:comment,
+            success:function(data){
+                this.setState({data:date})
+            }.bind(this),
+            error:function(xhr,status,err){
+                console.error(this.props.url,status,err.toString())
+            }.bind(this)
+        })
+    }
     componentDidMount(){
         this.loadComments()
         setInterval(this.loadComments,500)
@@ -33,7 +53,7 @@ class CommentBox extends React.Component{
             <div className="commentBox">
               <h1>Welcome To Add Comments!</h1>
               <CommentList data={this.state.data}/>
-              <CommentForm />
+              <CommentForm onCommentSubmit={this.onCommentSubmit.bind(this)}/>
             </div>
         )
     }
@@ -85,13 +105,26 @@ class CommentForm extends React.Component{
             comment:e.target.value
         })
     }
+    handleSubmit(e){
+        e.preventDefault()
+        let author = this.state.author.trim()
+        let comment = this.state.comment.trim()
+        if(!author || !comment){
+            return
+        }
+        this.props.onCommentSubmit({author:this.state.author,comment:this.state.comment})
+        this.setState({
+            author:'',
+            comment:''
+        })
+    }
     render(){
         return (
             <div className="commentForm">
                 <form>
                     <input className="name" type="text" placeholder="Your name" value={this.state.author} onChange={this.handleAuthorChange.bind(this)}/>
                     <input type="text" placeholder="Your comments" value={this.state.comment} onChange={this.handleCommentChange.bind(this)} />
-                    <input type="submit" value="post" />
+                    <input type="submit" value="post" onSubmit={this.handleSubmit.bind(this)} />
                 </form>
             </div>
         )
